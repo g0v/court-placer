@@ -11,11 +11,13 @@ with open('./地方法院管轄區域.csv', newline='') as src_csv:
         out_dict[row['地方法院']][row['簡易庭']] = {}
         loc_array = row['鄉鎮區'].split('、')
         now_city = ""
-        for loc in loc_array:
+        for index, loc in enumerate(loc_array):
             now_town = loc
-            if len(loc) > 5:
+            if len(loc) > 4 or index == 0:
                 now_city = loc[0:3]
                 now_town = loc[3:]
+                if len(now_town) < 1:
+                    now_town = now_city
             if now_city not in out_dict[row['地方法院']][row['簡易庭']]:
                 out_dict[row['地方法院']][row['簡易庭']][now_city] = []
             out_dict[row['地方法院']][row['簡易庭']][now_city].append(now_town)
