@@ -1,6 +1,7 @@
 import csv, json
 
 out_dict = {}
+out_dict2 = {}
 with open('./地方法院管轄區域.csv', newline='') as src_csv:
     reader = csv.DictReader(src_csv)
     for row in reader:
@@ -18,6 +19,13 @@ with open('./地方法院管轄區域.csv', newline='') as src_csv:
             if now_city not in out_dict[row['地方法院']][row['簡易庭']]:
                 out_dict[row['地方法院']][row['簡易庭']][now_city] = []
             out_dict[row['地方法院']][row['簡易庭']][now_city].append(now_town)
+            out_dict2[now_town] = {
+                "city": now_city,
+                "sim": row['簡易庭'],
+                "court": row['地方法院']
+            }
 
 with open('./地方法院管轄區域.json', 'w', newline='') as out_json:
     out_json.write(json.dumps(out_dict, ensure_ascii=False))
+with open('./鄉鎮區對應法院.json', 'w', newline='') as out_json:
+    out_json.write(json.dumps(out_dict2, ensure_ascii=False))
