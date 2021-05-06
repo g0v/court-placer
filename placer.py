@@ -19,5 +19,5 @@ with open('./地方法院管轄區域.csv', newline='') as src_csv:
                 out_dict[row['地方法院']][row['簡易庭']][now_city] = []
             out_dict[row['地方法院']][row['簡易庭']][now_city].append(now_town)
 
-with open('./out.json', 'w', newline='') as out_json:
+with open('./地方法院管轄區域.json', 'w', newline='') as out_json:
     out_json.write(json.dumps(out_dict, ensure_ascii=False))
