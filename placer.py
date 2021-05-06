@@ -19,8 +19,9 @@ with open('./地方法院管轄區域.csv', newline='') as src_csv:
             if now_city not in out_dict[row['地方法院']][row['簡易庭']]:
                 out_dict[row['地方法院']][row['簡易庭']][now_city] = []
             out_dict[row['地方法院']][row['簡易庭']][now_city].append(now_town)
-            out_dict2[now_town] = {
-                "city": now_city,
+            if now_city not in out_dict2:
+                out_dict2[now_city] = {}
+            out_dict2[now_city][now_town] = {
                 "sim": row['簡易庭'],
                 "court": row['地方法院']
             }
